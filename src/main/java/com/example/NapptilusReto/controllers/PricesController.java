@@ -1,6 +1,6 @@
 package com.example.NapptilusReto.controllers;
 
-import com.example.NapptilusReto.models.OutputPrices;
+import com.example.NapptilusReto.models.Offer;
 import com.example.NapptilusReto.models.Prices;
 import com.example.NapptilusReto.repositories.PricesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,25 +26,27 @@ public class PricesController {
     }
 
     @GetMapping("/retrieveOfferDetails")
-    public ResponseEntity<OutputPrices> getOfferDetail(@RequestParam Integer brand,
-                                                       @RequestParam Integer product,
-                                                       @RequestParam String date) {
+    public ResponseEntity<Offer> getOfferDetail(@RequestParam Integer brand,
+                                                @RequestParam Integer product,
+                                                @RequestParam String date) {
 
-        OutputPrices outputPrices = null;
+        Offer offer = null;
         List<Prices> listPrices = pricesRepository.findByProductIdAndBrandId(product, brand);
 
         for (Prices price : listPrices
         ) {
-            if ((price.getStartDate().compareTo(stringToDate(date)) < 0) && (price.getEndDate().compareTo(stringToDate(date)) > 0)) {
-                outputPrices = new OutputPrices(price);
+            if (((price.getStartDate().compareTo(stringToDate(date)) < 0) && (price.getEndDate().compareTo(stringToDate(date)) > 0))||
+                 (price.getStartDate().compareTo(stringToDate(date)) == 0)||
+                 (price.getEndDate().compareTo(stringToDate(date)) == 0)) {
+                    offer = new Offer(price);
             }
         }
-        if (outputPrices == null) {
+        if (offer == null) {
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(outputPrices, HttpStatus.OK);
+        return new ResponseEntity<>(offer, HttpStatus.OK);
 
     }
 

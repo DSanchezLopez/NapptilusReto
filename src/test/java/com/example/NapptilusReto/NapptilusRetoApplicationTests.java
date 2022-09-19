@@ -1,7 +1,7 @@
 package com.example.NapptilusReto;
 
 import com.example.NapptilusReto.controllers.PricesController;
-import com.example.NapptilusReto.models.OutputPrices;
+import com.example.NapptilusReto.models.Offer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +27,7 @@ class NapptilusRetoApplicationTests {
 @Test
     public void shouldReturnNoContent(){
 
-    ResponseEntity<OutputPrices> responseEntity = pricesController.getOfferDetail(0,0,"2030-06-14 00:00:00.0");
+    ResponseEntity<Offer> responseEntity = pricesController.getOfferDetail(0,0,"2030-06-14 00:00:00.0");
 
     assertEquals(responseEntity.getStatusCode(), HttpStatus.NO_CONTENT);
 
@@ -36,7 +36,7 @@ class NapptilusRetoApplicationTests {
     @Test
     public void shouldReturnAnOutputPricesFor141000DateWith3455ProductIdAnd1BrandId(){
 
-        ResponseEntity<OutputPrices> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-14 10:00:00.0");
+        ResponseEntity<Offer> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-14 10:00:00.0");
         assertEquals(responseEntity.getBody().getPrice(), 35.50);
         assertEquals(responseEntity.getBody().getStartDate().toString(), "2020-06-14 00:00:00.0");
         assertEquals(responseEntity.getBody().getEndDate().toString(), "2020-12-31 23:59:59.0");
@@ -49,7 +49,7 @@ class NapptilusRetoApplicationTests {
     @Test
     public void shouldReturnAnOutputPricesFor141600DateWith3455ProductIdAnd1BrandId(){
 
-        ResponseEntity<OutputPrices> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-14 16:00:00.0");
+        ResponseEntity<Offer> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-14 16:00:00.0");
         assertEquals(responseEntity.getBody().getPrice(), 25.45);
         assertEquals(responseEntity.getBody().getStartDate().toString(), "2020-06-14 15:00:00.0");
         assertEquals(responseEntity.getBody().getEndDate().toString(), "2020-06-14 18:30:00.0");
@@ -62,7 +62,7 @@ class NapptilusRetoApplicationTests {
     @Test
     public void shouldReturnAnOutputPricesFor142100DateWith3455ProductIdAnd1BrandId(){
 
-        ResponseEntity<OutputPrices> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-14 21:00:00.0");
+        ResponseEntity<Offer> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-14 21:00:00.0");
         assertEquals(responseEntity.getBody().getPrice(), 35.5);
         assertEquals(responseEntity.getBody().getStartDate().toString(), "2020-06-14 00:00:00.0");
         assertEquals(responseEntity.getBody().getEndDate().toString(), "2020-12-31 23:59:59.0");
@@ -75,7 +75,7 @@ class NapptilusRetoApplicationTests {
     @Test
     public void shouldReturnAnOutputPricesFor151000DateWith3455ProductIdAnd1BrandId(){
 
-        ResponseEntity<OutputPrices> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-15 10:00:00.0");
+        ResponseEntity<Offer> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-15 10:00:00.0");
         assertEquals(responseEntity.getBody().getPrice(), 30.5);
         assertEquals(responseEntity.getBody().getStartDate().toString(), "2020-06-15 00:00:00.0");
         assertEquals(responseEntity.getBody().getEndDate().toString(), "2020-06-15 11:00:00.0");
@@ -88,7 +88,7 @@ class NapptilusRetoApplicationTests {
     @Test
     public void shouldReturnAnOutputPricesFor162100DateWith3455ProductIdAnd1BrandId(){
 
-        ResponseEntity<OutputPrices> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-16 21:00:00.0");
+        ResponseEntity<Offer> responseEntity = pricesController.getOfferDetail(1,35455,"2020-06-16 21:00:00.0");
         assertEquals(responseEntity.getBody().getPrice(), 38.95);
         assertEquals(responseEntity.getBody().getStartDate().toString(), "2020-06-15 16:00:00.0");
         assertEquals(responseEntity.getBody().getEndDate().toString(), "2020-12-31 23:59:59.0");
